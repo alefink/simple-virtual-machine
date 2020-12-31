@@ -132,7 +132,7 @@ void vm_exec(VM *vm, int startip, bool trace)
                 vm->globals[addr] = vm->stack[sp--];
                 break;
             case PRINT:
-                printf("%d\n", vm->stack[sp--]);
+                printf("%c\n", vm->stack[sp--]);
                 break;
             case POP:
                 --sp;

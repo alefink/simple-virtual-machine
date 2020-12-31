@@ -3,7 +3,13 @@
 #include "vm.h"
 
 int hello[] = {
-	ICONST, 97,
+	ICONST, 397,
+	PRINT,
+	HALT
+};
+
+int mensaje[] = {
+	ICONST, 72,
 	PRINT,
 	HALT
 };
@@ -90,6 +96,10 @@ int main(int argc, char *argv[]) {
 	vm_exec(vm, 0, false);
 	vm_free(vm);
 	
+	vm = vm_create(mensaje, sizeof(mensaje), 2);
+	vm_exec(vm, 0, false);
+	vm_print_data(vm->globals, vm->nglobals);
+	vm_free(vm);
 
 	vm = vm_create(loop, sizeof(loop), 2);
 	vm_exec(vm, 0, false);
