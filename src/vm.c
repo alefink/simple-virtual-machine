@@ -132,7 +132,7 @@ void vm_exec(VM *vm, int startip, bool trace)
                 vm->globals[addr] = vm->stack[sp--];
                 break;
             case PRINT:
-                printf("%c\n", vm->stack[sp--]);
+                printf("%c", vm->stack[sp--]);
                 break;
             case POP:
                 --sp;
@@ -156,7 +156,6 @@ void vm_exec(VM *vm, int startip, bool trace)
                 callsp--; // pop context
                 break;
             case READ:
-                
                 vm->stack[++sp] = getchar();
                 //almacenar en el pila o globalmente
                 break;

@@ -11,6 +11,12 @@ int hello[] = {
 int mensaje[] = {
 	ICONST, 72,
 	PRINT,
+	ICONST,  111,
+	PRINT,
+	ICONST, 108,
+	PRINT,
+	ICONST, 97,
+	PRINT,
 	HALT
 };
 
@@ -47,7 +53,8 @@ int factorial[] = {
 	ICONST, 2,              // 2
 	ILT,                    // 4
 	BRF, 10,                // 5
-	ICONST, 1,              // 7
+	ICONST, 1,              // 7,
+	ICONST, 13,
 	RET,                    // 9
 //CONT:
 //	RETURN N * FACT(N-1)
@@ -92,13 +99,15 @@ static int readcharandEcho[] = {
 };
 
 int main(int argc, char *argv[]) {
-	VM *vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
-	vm_exec(vm, 0, false);
-	vm_free(vm);
+	VM *vm = 
 	
 	vm = vm_create(mensaje, sizeof(mensaje), 2);
 	vm_exec(vm, 0, false);
 	vm_print_data(vm->globals, vm->nglobals);
+	vm_free(vm);
+
+	vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
+	vm_exec(vm, 0, false);
 	vm_free(vm);
 
 	vm = vm_create(loop, sizeof(loop), 2);
