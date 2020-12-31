@@ -91,6 +91,11 @@ int main(int argc, char *argv[]) {
 	vm_free(vm);
 	
 
+	vm = vm_create(loop, sizeof(loop), 2);
+	vm_exec(vm, 0, false);
+	vm_print_data(vm->globals, vm->nglobals);
+	vm_free(vm);
+
 //    int t1 = (clock() / (CLOCKS_PER_SEC / 1000));
 	/*vm = vm_create(loop, sizeof(loop), 2);
 	vm_exec(vm, 0, false);
@@ -98,18 +103,18 @@ int main(int argc, char *argv[]) {
 	vm_free(vm); */
 
 //    int t2 = (clock() / (CLOCKS_PER_SEC / 1000));
-	/*
+	
 	vm = vm_create(factorial, sizeof(factorial), 0);
 	vm_exec(vm, 23, false);
 	vm_free(vm);
-	*/
+	
 
 		
-	/*
+	
 	vm = vm_create(f, sizeof(f), 0);
 	vm_exec(vm, 0, false);
 	vm_free(vm);
-	*/
+	
 //    printf("duration = %d ms\n", (t2 - t1));
 
 
