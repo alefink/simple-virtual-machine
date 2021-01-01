@@ -101,7 +101,7 @@ static int readcharandEcho[] = {
 int main(int argc, char *argv[]) {
 	VM *vm = 
 	
-	vm = vm_create(mensaje, sizeof(mensaje), 2);
+	vm = vm_create(mensaje, sizeof(mensaje), 12);
 	printf("Mensaje Test\n");
 	vm_exec(vm, 0, false);
 	//vm_print_data(vm->globals, vm->nglobals);
