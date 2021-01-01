@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
 #include "vm.h"
 
 int hello[] = {
@@ -101,27 +102,30 @@ static int readcharandEcho[] = {
 int main(int argc, char *argv[]) {
 	VM *vm = 
 	
+	/*
 	vm = vm_create(mensaje, sizeof(mensaje), 2);
 	vm_exec(vm, 0, false);
 	vm_print_data(vm->globals, vm->nglobals);
 	vm_free(vm);
+	*/
 
-	vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
-	vm_exec(vm, 0, false);
+	// vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
+	// vm_exec(vm, 0, false);
+	// vm_free(vm);
+
+	vm = vm_create(loop, sizeof(loop), 2);
+	vm_exec(vm, 0, true);
+	vm_print_data(vm->globals, vm->nglobals);
 	vm_free(vm);
 
+	int t1 = (clock() / (CLOCKS_PER_SEC / 1000));
 	vm = vm_create(loop, sizeof(loop), 2);
 	vm_exec(vm, 0, false);
 	vm_print_data(vm->globals, vm->nglobals);
 	vm_free(vm);
-
-//    int t1 = (clock() / (CLOCKS_PER_SEC / 1000));
-	/*vm = vm_create(loop, sizeof(loop), 2);
-	vm_exec(vm, 0, false);
-	vm_print_data(vm->globals, vm->nglobals);
-	vm_free(vm); */
-
-//    int t2 = (clock() / (CLOCKS_PER_SEC / 1000));
+    int t2 = (clock() / (CLOCKS_PER_SEC / 1000));
+	printf("----------------\n");	
+    printf("duration = %d ms\n", (t2 - t1));
 	
 	vm = vm_create(factorial, sizeof(factorial), 0);
 	vm_exec(vm, 23, false);
@@ -134,7 +138,6 @@ int main(int argc, char *argv[]) {
 	vm_exec(vm, 0, false);
 	vm_free(vm);
 	
-//    printf("duration = %d ms\n", (t2 - t1));
 
 
 	return 0;
