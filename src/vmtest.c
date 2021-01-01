@@ -146,11 +146,11 @@ int main(int argc, char *argv[]) {
 	vm_exec(vm, 0, false);
 	vm_free(vm);
 	
-	// printf("\t \nRead and Echo char Test:\n");
-	// vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
-	// vm_exec(vm, 0, false);
-	// //vm_print_data(vm->globals, vm->nglobals);
-	// vm_free(vm);
+	printf("\t \n Read and Echo char Test:\n");
+	vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
+	vm_exec(vm, 0, false);
+	//vm_print_data(vm->globals, vm->nglobals);
+	vm_free(vm);
 
 	// descomentar par probar las otras pruebas
 
