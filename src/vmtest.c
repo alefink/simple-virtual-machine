@@ -55,7 +55,6 @@ int factorial[] = {
 	ILT,                    // 4
 	BRF, 10,                // 5
 	ICONST, 1,              // 7,
-	ICONST, 13,
 	RET,                    // 9
 //CONT:
 //	RETURN N * FACT(N-1)
@@ -136,9 +135,6 @@ int main(int argc, char *argv[]) {
 	vm = vm_create(f, sizeof(f), 0);
 	vm_exec(vm, 0, false);
 	vm_free(vm);
-	
-
-
 	return 0;
 }
 
