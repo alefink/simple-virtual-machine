@@ -11,13 +11,13 @@ int hello[] = {
 
 int mensaje[] = {
 	ICONST, 72,
-	PRINT,
+	PRINTC,
 	ICONST,  111,
-	PRINT,
+	PRINTC,
 	ICONST, 108,
-	PRINT,
+	PRINTC,
 	ICONST, 97,
-	PRINT,
+	PRINTC,
 	HALT
 };
 
@@ -104,13 +104,17 @@ int main(int argc, char *argv[]) {
 	vm = vm_create(mensaje, sizeof(mensaje), 2);
 	printf("Mensaje Test\n");
 	vm_exec(vm, 0, false);
-	vm_print_data(vm->globals, vm->nglobals);
+	//vm_print_data(vm->globals, vm->nglobals);
 	vm_free(vm);
 	
-	printf("Read and Echo char Test\n");
+	printf("\t \nRead and Echo char Test\n");
 	vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
 	vm_exec(vm, 0, false);
+	//vm_print_data(vm->globals, vm->nglobals);
 	vm_free(vm);
+
+	// descomentar par probar las otras pruebas
+
 
 	// printf("Loop Test\n");	
 	// vm = vm_create(loop, sizeof(loop), 2);
