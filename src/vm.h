@@ -31,6 +31,7 @@ typedef enum {
     RET     = 17,  // return value from function
     HALT    = 18,
     READ    = 19,
+    PRINTC  = 20,
 } VM_CODE;
 
 typedef struct {

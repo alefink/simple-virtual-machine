@@ -73,7 +73,7 @@ int factorial[] = {
 	HALT                    // 30
 };
 
-static int f[] = {
+static int function[] = {
 	//								ADDRESS
 	//.def main() { print f(10); }
 	ICONST, 45,             // 0
@@ -92,47 +92,47 @@ static int f[] = {
 };
 
 static int readcharandEcho[] = {
-	ICONST, 40,
 	READ,
-	PRINT,
+	PRINTC,
 	HALT
 };
 
 int main(int argc, char *argv[]) {
 	VM *vm = 
 	
-	/*
 	vm = vm_create(mensaje, sizeof(mensaje), 2);
+	printf("Mensaje Test\n");
 	vm_exec(vm, 0, false);
 	vm_print_data(vm->globals, vm->nglobals);
 	vm_free(vm);
-	*/
+	
+	printf("Read and Echo char Test\n");
+	vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
+	vm_exec(vm, 0, false);
+	vm_free(vm);
 
-	// vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
-	// vm_exec(vm, 0, false);
-	// vm_free(vm);
-
+	printf("Loop Test\n");	
 	vm = vm_create(loop, sizeof(loop), 2);
-	vm_exec(vm, 0, true);
+	vm_exec(vm, 0, false);
 	vm_print_data(vm->globals, vm->nglobals);
 	vm_free(vm);
 
 	int t1 = (clock() / (CLOCKS_PER_SEC / 1000));
 	vm = vm_create(loop, sizeof(loop), 2);
-	vm_exec(vm, 0, false);
+	vm_exec(vm, 0, true);
 	vm_print_data(vm->globals, vm->nglobals);
 	vm_free(vm);
     int t2 = (clock() / (CLOCKS_PER_SEC / 1000));
 	printf("----------------\n");	
-    printf("duration = %d ms\n", (t2 - t1));
+    printf("duration loop = %d ms\n", (t2 - t1));
 
 	printf("Factorial Test\n");	
-    
 	vm = vm_create(factorial, sizeof(factorial), 0);
 	vm_exec(vm, 23, false);
 	vm_free(vm);
 
-	vm = vm_create(f, sizeof(f), 0);
+	printf("Function Test\n");	
+	vm = vm_create(function, sizeof(function), 0);
 	vm_exec(vm, 0, false);
 	vm_free(vm);
 	return 0;
