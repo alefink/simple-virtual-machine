@@ -26,6 +26,8 @@ static VM_INSTRUCTION vm_instructions[] = {
     { "store",  1 },
     { "gstore", 1 },
     { "print",  0 },
+    { "printc", 0 },
+    { "read",   0 },
     { "pop",    0 },
     { "call",   3 },
     { "ret",    0 },
@@ -135,9 +137,8 @@ void vm_exec(VM *vm, int startip, bool trace)
                 printf("%d\n", vm->stack[sp--]);
                 break;
             case PRINTC:
-                // printf("%c\n", vm->stack[sp--]);
-                //char c = vm->stack[sp--];
                 putchar(vm->stack[sp--]);
+                putchar(' ');
                 break;    
             case POP:
                 --sp;

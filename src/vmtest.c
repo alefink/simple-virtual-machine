@@ -4,18 +4,6 @@
 #include "vm.h"
 
 int hello[] = {
-	ICONST, 397,
-	PRINT,
-	HALT
-};
-
-int mensaje[] = {
-	ICONST, 72,
-	PRINTC,
-	ICONST,  111,
-	PRINTC,
-	ICONST, 108,
-	PRINTC,
 	ICONST, 97,
 	PRINTC,
 	HALT
@@ -62,13 +50,13 @@ int factorial[] = {
 	LOAD, 0,                // 12
 	ICONST, 1,              // 14
 	ISUB,                   // 16
-	CALL, FACTORIAL_ADDRESS, 1, 0,    // 17
+	CALL, 0, 1, 0,    // 17
 	IMUL,                   // 21
 	RET,                    // 22
 //.DEF MAIN: ARGS=0, LOCALS=0
 // PRINT FACT(1)
 	ICONST, 5,              // 23    <-- MAIN METHOD!
-	CALL, FACTORIAL_ADDRESS, 1, 0,    // 25
+	CALL, 0, 1, 0,    // 25
 	PRINT,                  // 29
 	HALT                    // 30
 };
@@ -76,9 +64,9 @@ int factorial[] = {
 static int function[] = {
 	//								ADDRESS
 	//.def main() { print f(10); }
-	ICONST, 45,             // 0
+	ICONST, 10,             // 0
 	CALL, 8, 1, 1,          // 2
-	PRINT,                  // 6
+	PRINT,                 // 6
 	HALT,                   // 7
 	//.def f(x): ARGS=1, LOCALS=1
 	//  a = x;
@@ -91,35 +79,86 @@ static int function[] = {
 	RET
 };
 
+static int myfunction[] = {
+	//								ADDRESS
+	//.def main() { print f(10); }
+	ICONST, 10,             // 0
+	CALL, 8, 1, 1,          // 2
+	PRINT,                 // 6
+	HALT,                   // 7
+	//.def f(x): ARGS=1, LOCALS=1
+	//  a = x;
+	LOAD, 0,                // 8	<-- start of f
+	STORE, 1,
+	// return 2*a
+	LOAD, 1,
+	ICONST, 2,
+	IMUL,
+	RET
+};
+
+// static int displayMensaje[] = {
+// 	ICONST, 72,
+// 	ICONST, 111,
+// 	ICONST, 108,
+// 	ICONST, 97,
+// 	CALL, 9, 4, 1,
+// 	PRINT,
+// 	HALT,
+// 	LOAD, 0,
+// 	STORE, 1,
+// 	LOAD, 1,
+// 	PRINTC,
+// 	RET
+// };
+
 static int readcharandEcho[] = {
-	ICONST, 30,
-	READ,
+	READ, 
+	PRINTC, 
+	HALT
+};
+
+int mensaje[] = {
+	ICONST, 72,
 	PRINTC,
+	ICONST,  111,
+	PRINTC,
+	ICONST, 108,
+	PRINTC,
+    ICONST, 97,
+	PRINTC,
+	//ICONST, 11,
+	//PRINTC,
 	HALT
 };
 
 int main(int argc, char *argv[]) {
-	VM *vm = 
-	
-	vm = vm_create(mensaje, sizeof(mensaje), 12);
-	printf("Mensaje Test\n");
-	vm_exec(vm, 0, false);
+	VM *vm;
+
+	printf("\nMyFunction Test\n");	
+	vm = vm_create(myfunction, sizeof(myfunction), 0);
+	vm_exec(vm, 0, true);
 	//vm_print_data(vm->globals, vm->nglobals);
 	vm_free(vm);
-	
-	printf("\t \nRead and Echo char Test\n");
-	vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
+
+	printf("Mensaje Test:\n");
+	vm = vm_create(mensaje, sizeof(mensaje), 0);
 	vm_exec(vm, 0, false);
-	//vm_print_data(vm->globals, vm->nglobals);
 	vm_free(vm);
+	
+	// printf("\t \nRead and Echo char Test:\n");
+	// vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
+	// vm_exec(vm, 0, false);
+	// //vm_print_data(vm->globals, vm->nglobals);
+	// vm_free(vm);
 
 	// descomentar par probar las otras pruebas
 
 
 	// printf("Loop Test\n");	
 	// vm = vm_create(loop, sizeof(loop), 2);
-	// vm_exec(vm, 0, false);
-	// vm_print_data(vm->globals, vm->nglobals);
+	// vm_exec(vm, 0, true);
+	// //vm_print_data(vm->globals, vm->nglobals);
 	// vm_free(vm);
 
 	// int t1 = (clock() / (CLOCKS_PER_SEC / 1000));
@@ -136,10 +175,6 @@ int main(int argc, char *argv[]) {
 	// vm_exec(vm, 23, false);
 	// vm_free(vm);
 
-	// printf("Function Test\n");	
-	// vm = vm_create(function, sizeof(function), 0);
-	// vm_exec(vm, 0, false);
-	// vm_free(vm);
-	return 0;
+	return(0);	
 }
 

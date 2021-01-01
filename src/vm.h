@@ -30,8 +30,8 @@ typedef enum {
     CALL    = 16,  // call function at address with nargs,nlocals
     RET     = 17,  // return value from function
     HALT    = 18,
-    READ    = 19,
     PRINTC  = 20,
+    READ    = 19,
 } VM_CODE;
 
 typedef struct {
