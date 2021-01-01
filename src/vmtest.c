@@ -126,14 +126,13 @@ int main(int argc, char *argv[]) {
     int t2 = (clock() / (CLOCKS_PER_SEC / 1000));
 	printf("----------------\n");	
     printf("duration = %d ms\n", (t2 - t1));
-	
+
+	printf("Factorial Test\n");	
+    
 	vm = vm_create(factorial, sizeof(factorial), 0);
 	vm_exec(vm, 23, false);
 	vm_free(vm);
-	
 
-		
-	
 	vm = vm_create(f, sizeof(f), 0);
 	vm_exec(vm, 0, false);
 	vm_free(vm);
