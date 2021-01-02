@@ -97,20 +97,31 @@ static int myfunction[] = {
 	RET
 };
 
-// static int displayMensaje[] = {
-// 	ICONST, 72,
-// 	ICONST, 111,
-// 	ICONST, 108,
-// 	ICONST, 97,
-// 	CALL, 9, 4, 1,
-// 	PRINT,
-// 	HALT,
-// 	LOAD, 0,
-// 	STORE, 1,
-// 	LOAD, 1,
-// 	PRINTC,
-// 	RET
-// };
+/*
+	ICONST, 72,  //H
+	ICONST, 101, //e
+	ICONST, 108, //l
+	ICONST, 108, //l
+	ICONST, 111, //o
+	ICONST, 97,
+	*/
+static int displayMensaje[] = {
+	//								ADDRESS
+	//.def main() { print f("hello"); }
+	ICONST, 72,              // 0
+	ICONST, 101,             // 2 
+	CALL, 10, 2, 0,          // 6
+	PRINTC,                  // 8
+	HALT,                    // 9
+	//.def f(x): ARGS=1, LOCALS=1
+	LOAD, 0,                 // 10	<-- start of f
+	STORE, 0,
+	//POP,
+	LOAD, 1,
+	//STORE, 1,
+	//LOAD, 1,
+	RET
+};
 
 static int readcharandEcho[] = {
 	READ, 
@@ -135,22 +146,28 @@ int mensaje[] = {
 int main(int argc, char *argv[]) {
 	VM *vm;
 
-	printf("\nMyFunction Test\n");	
-	vm = vm_create(myfunction, sizeof(myfunction), 0);
+	// printf("\nfunction Test\n");	
+	// vm = vm_create(function, sizeof(function), 0);
+	// vm_exec(vm, 0, true);
+	// vm_free(vm);
+
+	printf("\nDisplayMensaje Test\n");	
+	vm = vm_create(displayMensaje, sizeof(displayMensaje), 0);
 	vm_exec(vm, 0, true);
-	//vm_print_data(vm->globals, vm->nglobals);
 	vm_free(vm);
 
-	printf("Mensaje Test:\n");
-	vm = vm_create(mensaje, sizeof(mensaje), 0);
-	vm_exec(vm, 0, false);
-	vm_free(vm);
+
+
+	// printf("Mensaje Test:\n");
+	// vm = vm_create(mensaje, sizeof(mensaje), 0);
+	// vm_exec(vm, 0, false);
+	// vm_free(vm);
 	
-	printf("\t \n Read and Echo char Test:\n");
-	vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
-	vm_exec(vm, 0, false);
-	//vm_print_data(vm->globals, vm->nglobals);
-	vm_free(vm);
+	// printf("\t \n Read and Echo char Test:\n");
+	// vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
+	// vm_exec(vm, 0, false);
+	// //vm_print_data(vm->globals, vm->nglobals);
+	// vm_free(vm);
 
 	// descomentar par probar las otras pruebas
 

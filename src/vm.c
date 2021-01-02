@@ -26,15 +26,22 @@ static VM_INSTRUCTION vm_instructions[] = {
     { "store",  1 },
     { "gstore", 1 },
     { "print",  0 },
-    { "printc", 0 },
-    { "read",   0 },
     { "pop",    0 },
     { "call",   3 },
     { "ret",    0 },
-    { "halt",   0 }
+    { "halt",   0 },
+    { "printc", 0 },
+    { "read",   0 }
 };
 
 static void vm_context_init(Context *ctx, int ip, int nlocals);
+
+VM *vm_create(int *code, int code_size, int nglobals)
+{
+    VM *vm = calloc(1, sizeof(VM));
+    vm_init(vm, code, code_size, nglobals);
+    return vm;
+}
 
 void vm_init(VM *vm, int *code, int code_size, int nglobals)
 {
@@ -50,12 +57,7 @@ void vm_free(VM *vm)
     free(vm);
 }
 
-VM *vm_create(int *code, int code_size, int nglobals)
-{
-    VM *vm = calloc(1, sizeof(VM));
-    vm_init(vm, code, code_size, nglobals);
-    return vm;
-}
+
 
 void vm_exec(VM *vm, int startip, bool trace)
 {
