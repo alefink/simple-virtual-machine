@@ -135,6 +135,7 @@ static int readcharandEcho[] = {
 int mensaje[] = {
 	//ICONST, 4,
 	//ICONST, 'h',
+	//Icadenas, 'hola' 0 "hola", 
 	ICONST, 'H',
 	//PRINTC,
 	ICONST,  'o',
