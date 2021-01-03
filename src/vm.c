@@ -139,8 +139,12 @@ void vm_exec(VM *vm, int startip, bool trace)
                 printf("%d\n", vm->stack[sp--]);
                 break;
             case PRINTC:
-                putchar(vm->stack[sp--]);
-                putchar(' ');
+                for (int i = 0; i <= vm->stack[sp]; i++)
+                {
+                    
+                    putchar(vm->stack[sp--]); 
+                }
+                
                 break;    
             case POP:
                 --sp;

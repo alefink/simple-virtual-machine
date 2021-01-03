@@ -133,13 +133,16 @@ static int readcharandEcho[] = {
 };
 
 int mensaje[] = {
-	ICONST, 72,
-	PRINTC,
-	ICONST,  111,
-	PRINTC,
-	ICONST, 108,
-	PRINTC,
-    ICONST, 97,
+	//ICONST, 4,
+	//ICONST, 'h',
+	ICONST, 'H',
+	//PRINTC,
+	ICONST,  'o',
+	//PRINTC,
+	ICONST, 'l',
+	//PRINTC,
+    ICONST, 'a',
+	ICONST, 4,
 	PRINTC,
 	//ICONST, 11,
 	//PRINTC,
@@ -154,17 +157,17 @@ int main(int argc, char *argv[]) {
 	// vm_exec(vm, 0, true);
 	// vm_free(vm);
 
-	printf("\nDisplayMensaje Test\n");	
-	vm = vm_create(displayMensaje, sizeof(displayMensaje), 0);
+	// printf("\nDisplayMensaje Test\n");	
+	// vm = vm_create(displayMensaje, sizeof(displayMensaje), 0);
+	// vm_exec(vm, 0, true);
+	// vm_free(vm);
+
+
+
+	printf("Mensaje Test:\n");
+	vm = vm_create(mensaje, sizeof(mensaje), 0);
 	vm_exec(vm, 0, true);
 	vm_free(vm);
-
-
-
-	// printf("Mensaje Test:\n");
-	// vm = vm_create(mensaje, sizeof(mensaje), 0);
-	// vm_exec(vm, 0, false);
-	// vm_free(vm);
 	
 	// printf("\t \n Read and Echo char Test:\n");
 	// vm = vm_create(readcharandEcho, sizeof(readcharandEcho), 0);
