@@ -109,17 +109,20 @@ static int displayMensaje[] = {
 	//								ADDRESS
 	//.def main() { print f("hello"); }
 	ICONST, 72,              // 0
-	ICONST, 101,             // 2 
-	CALL, 10, 2, 0,          // 6
+	ICONST, 101,             // 2
+	ICONST, 108,
+	ICONST, 108,
+	ICONST, 111,   
+	CALL, 16, 5, 0,          // 6
 	PRINTC,                  // 8
 	HALT,                    // 9
 	//.def f(x): ARGS=1, LOCALS=1
 	LOAD, 0,                 // 10	<-- start of f
 	STORE, 0,
-	//POP,
 	LOAD, 1,
-	//STORE, 1,
-	//LOAD, 1,
+	LOAD, 0,                 // 10	<-- start of f
+	STORE, 1,
+	LOAD, 1,
 	RET
 };
 
