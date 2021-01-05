@@ -139,18 +139,23 @@ void vm_exec(VM *vm, int startip, bool trace)
                 printf("%d\n", vm->stack[sp--]);
                 break;
             case PRINTC:
-                for (int i = 0; i <= vm->stack[sp]; i++)
+            {
+                int nargs = vm->stack[sp]; // num args in local context
+                int auxsp = sp;            //store the stack pointer
+                sp = sp - nargs;           // move stavk to first arg
+                for (int i = 0; i < nargs; i++) //scan other args from context
                 {
-                    
-                    putchar(vm->stack[sp--]); 
+                    putchar(vm->stack[sp++]); // print agruments for each tieme
                 }
-                
+                sp = auxsp;              // restor stack origianl value
+            }
+
                 break;    
             case POP:
                 --sp;
                 break;
             case CALL:
-                // expects all args on stack
+                // expects all args on stack  
                 addr = vm->code[ip++];			// index of target function
                 int nargs = vm->code[ip++]; 	// how many args got pushed
                 int nlocals = vm->code[ip++]; 	// how many locals to allocate
